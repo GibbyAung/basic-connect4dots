@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>How to Play</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>How to Play</h1>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark</span>
+      </button>
+    </header>
+
+    <nav class="nav">
+      <ul class="navlist">
+        <li class="navlist-li"><a href="index.html">Home</a></li>
+        <li class="navlist-li"><a href="play.html">Play</a></li>
+        <li class="navlist-li"><a href="modes.html">Game Modes</a></li>
+        <li class="navlist-li"><a href="settings.html">Settings</a></li>
+        <li class="navlist-li"><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="tutorial-section">
+        <h2>🎮 Interactive Tutorial</h2>
+        <p>Watch a demo game to learn how to play Connect 4!</p>
+
+        <!-- Tutorial Board Section -->
+        <div class="tutorial-board-section">
+          <div id="tutorial-board" class="connect4-board tutorial-board"></div>
+          <div class="tutorial-controls">
+            <button id="tutorial-play" class="tutorial-btn">
+              ▶️ Play Demo
+            </button>
+            <button id="tutorial-pause" class="tutorial-btn" disabled>
+              ⏸️ Pause
+            </button>
+            <button id="tutorial-reset" class="tutorial-btn">🔄 Reset</button>
+            <div class="tutorial-speed">
+              <label>Speed:</label>
+              <select id="tutorial-speed">
+                <option value="2000">Slow</option>
+                <option value="1000" selected>Normal</option>
+                <option value="500">Fast</option>
+              </select>
+            </div>
+          </div>
+          <div class="tutorial-info">
+            <p id="tutorial-message">
+              Click "Play Demo" to start the tutorial!
+            </p>
+            <div class="tutorial-progress">
+              <div class="progress-bar">
+                <div id="tutorial-progress-fill" class="progress-fill"></div>
+              </div>
+              <span id="tutorial-step-info">Step 0/0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutorial Instructions Section -->
+        <div class="tutorial-instructions-section">
+          <h3>📖 How to Play</h3>
+          <div class="instruction-header">
+            <h4 id="instruction-title" style="color: #1a1a2e !important">
+              Choose Your Column
+            </h4>
+            <p id="instruction-text" style="color: #4a4a6e !important">
+              Click on any column to drop your colored disc. The disc will fall
+              to the lowest available position.
+            </p>
+          </div>
+          <div class="instruction-progress">
+            <span id="instruction-step">Step 1/5</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>📋 Quick Rules</h2>
+        <ul class="instruction">
+          <li class="instruction-text">
+            Select a game mode from the Game Modes page.
+          </li>
+          <li class="instruction-text">
+            Players take turns dropping colored discs into the grid.
+          </li>
+          <li class="instruction-text">
+            The first player to connect 4 discs in a row wins.
+          </li>
+          <li class="instruction-text">
+            If all cells are filled with no winner, it's a draw.
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 My Game</p>
+    </footer>
+
+    <script src="theme-manager.js"></script>
+    <script src="tutorial.js"></script>
+  </body>
+</html>

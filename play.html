@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Play Game</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Play</h1>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark</span>
+      </button>
+    </header>
+
+    <nav class="nav">
+      <ul class="navlist">
+        <li class="navlist-li"><a href="index.html">Home</a></li>
+        <li class="navlist-li"><a href="modes.html">Game Modes</a></li>
+        <li class="navlist-li"><a href="how-to-play.html">How to Play</a></li>
+        <li class="navlist-li"><a href="settings.html">Settings</a></li>
+        <li class="navlist-li"><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- GAME BOARD -->
+      <section id="game-board-section">
+        <h2>Connect 4</h2>
+        <a href="modes.html" class="change-mode-link">Change Mode</a>
+        <div id="game-board" class="connect4-board"></div>
+        <p id="current-player">
+          Current Player: <span id="player-color">Red</span>
+        </p>
+
+        <div class="game-controls">
+          <button id="undo-button" disabled>↶ Undo</button>
+          <button id="replay-button">▶ Replay</button>
+          <button id="new-game-button">🔄 New Game</button>
+        </div>
+      </section>
+
+      <!-- GAME OVER SCREEN -->
+      <section id="game-over-section" class="card" style="display: none">
+        <h2>Game Over</h2>
+        <p id="game-result">Player X Wins!</p>
+
+        <div id="name-input-section" style="display: none">
+          <p>🏆 Enter your name for the Hall of Fame:</p>
+          <input
+            type="text"
+            id="winner-name-input"
+            placeholder="Enter your name..."
+            maxlength="20"
+            style="
+              padding: 8px;
+              margin: 10px 0;
+              border: 2px solid var(--accent-color);
+              border-radius: 8px;
+              background: var(--card-bg);
+              color: var(--text-color);
+              font-size: 16px;
+              width: 200px;
+            "
+          />
+          <div style="margin-top: 10px">
+            <button id="save-name-button">💾 Save Name</button>
+            <button id="skip-name-button">⏭️ Skip</button>
+          </div>
+        </div>
+
+        <div id="game-over-buttons" style="display: none">
+          <button id="restart-button">Restart</button>
+          <button id="rematch-button">Rematch</button>
+        </div>
+      </section>
+
+      <!-- LEADERBOARD SECTION -->
+      <section id="leaderboard-section">
+        <h2>🏆 Leaderboard</h2>
+        <div id="leaderboard-list"></div>
+        <button id="clear-leaderboard">Clear Leaderboard</button>
+      </section>
+
+      <section id="game-history-section">
+        <h2>📜 Game History</h2>
+        <div id="game-history-list"></div>
+        <div class="history-actions">
+          <button id="clear-history" onclick="game.clearGameHistory()">
+            Clear All History
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Victory Particles Canvas -->
+    <canvas
+      id="victory-canvas"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+      "
+    ></canvas>
+
+    <!-- Modular Components -->
+    <script src="theme-manager.js"></script>
+    <script src="game-state.js"></script>
+    <script src="game-engine.js"></script>
+    <script src="game-ui.js"></script>
+    <script src="ai-engine.js"></script>
+    <script src="sound-effects.js"></script>
+    <script src="victory-particles.js"></script>
+    <script src="play.js"></script>
+    <script>
+      const gameMode = localStorage.getItem("gameMode");
+
+      if (gameMode) {
+        const modeText =
+          gameMode === "ai" ? "Player vs AI" : "Player vs Player";
+        document.getElementById("current-player").innerHTML =
+          "Mode: " +
+          modeText +
+          ' | Current Player: <span id="player-color">Red</span>';
+      }
+    </script>
+  </body>
+</html>

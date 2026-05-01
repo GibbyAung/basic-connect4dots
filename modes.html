@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Game Modes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Game Modes</h1>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark</span>
+      </button>
+    </header>
+
+    <nav class="nav">
+      <ul class="navlist">
+        <li class="navlist-li"><a href="index.html">Home</a></li>
+        <li class="navlist-li"><a href="play.html">Play</a></li>
+        <li class="navlist-li"><a href="how-to-play.html">How to Play</a></li>
+        <li class="navlist-li"><a href="settings.html">Settings</a></li>
+        <li class="navlist-li"><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="mode-section card">
+        <h2>Select Mode</h2>
+
+        <div class="mode-select card">
+          <h3>Player vs Player</h3>
+          <p>Two players take turns on the same device.</p>
+          <button id="pvp-mode">Select</button>
+        </div>
+
+        <div class="mode-select card">
+          <h3>Player vs AI</h3>
+          <p>Play against the computer.</p>
+          <div class="difficulty-select">
+            <label for="difficulty">Difficulty:</label>
+            <select id="difficulty">
+              <option value="easy">Easy (2 moves ahead)</option>
+              <option value="medium" selected>Medium (4 moves ahead)</option>
+              <option value="hard">Hard (7+ moves ahead)</option>
+            </select>
+          </div>
+          <button id="ai-mode">Select</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="theme-manager.js"></script>
+    <script>
+      document
+        .getElementById("pvp-mode")
+        .addEventListener("click", function () {
+          localStorage.setItem("gameMode", "pvp");
+          window.location.href = "play.html";
+        });
+
+      document.getElementById("ai-mode").addEventListener("click", function () {
+        const difficulty = document.getElementById("difficulty").value;
+        localStorage.setItem("gameMode", "ai");
+        localStorage.setItem("difficulty", difficulty);
+        window.location.href = "play.html";
+      });
+    </script>
+  </body>
+</html>

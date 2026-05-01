@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Settings</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Settings</h1>
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Dark</span>
+      </button>
+    </header>
+
+    <nav class="nav">
+      <ul class="navlist">
+        <li class="navlist-li"><a href="index.html">Home</a></li>
+        <li class="navlist-li"><a href="play.html">Play</a></li>
+        <li class="navlist-li"><a href="modes.html">Game Modes</a></li>
+        <li class="navlist-li"><a href="how-to-play.html">How to Play</a></li>
+        <li class="navlist-li"><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <section class="card">
+        <h2>Theme Selection</h2>
+        <select id="theme-select">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </section>
+
+      <section class="card">
+        <h2>Reset Score</h2>
+        <button id="reset-score">Reset</button>
+      </section>
+
+      <section class="card">
+        <h2>Game Colors</h2>
+        <div class="color-settings">
+          <div class="color-input-group">
+            <label for="player1-color">Player 1 Color:</label>
+            <input type="color" id="player1-color" value="#e94560" />
+          </div>
+          <div class="color-input-group">
+            <label for="player2-color">Player 2 Color:</label>
+            <input type="color" id="player2-color" value="#f4d03f" />
+          </div>
+          <button id="reset-colors">Reset to Default</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Sound</h2>
+        <label>
+          <input type="checkbox" id="sound-toggle" />
+          Enable Sound
+        </label>
+      </section>
+
+      <script>
+        // Sound toggle functionality
+        const soundToggle = document.getElementById("sound-toggle");
+        const savedSoundEnabled =
+          localStorage.getItem("soundEnabled") !== "false";
+        soundToggle.checked = savedSoundEnabled;
+
+        soundToggle.addEventListener("change", () => {
+          localStorage.setItem("soundEnabled", soundToggle.checked);
+        });
+      </script>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 My Game</p>
+    </footer>
+
+    <script src="theme-manager.js"></script>
+    <script>
+      // Theme select dropdown sync with theme manager
+      const themeSelect = document.getElementById("theme-select");
+
+      // Wait for theme manager to initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        setTimeout(() => {
+          if (window.themeManager) {
+            const currentTheme = window.themeManager.getCurrentTheme();
+            themeSelect.value = currentTheme;
+
+            themeSelect.addEventListener("change", () => {
+              window.themeManager.setTheme(themeSelect.value);
+              window.themeManager.saveTheme(themeSelect.value);
+              window.themeManager.updateThemeButton(themeSelect.value);
+            });
+          }
+        }, 100);
+      });
+
+      // Color customization functionality
+      const player1ColorInput = document.getElementById("player1-color");
+      const player2ColorInput = document.getElementById("player2-color");
+      const resetColorsButton = document.getElementById("reset-colors");
+
+      // Load saved colors
+      const savedColors = JSON.parse(
+        localStorage.getItem("connect4Colors") || "{}",
+      );
+      player1ColorInput.value = savedColors.player1 || "#e94560";
+      player2ColorInput.value = savedColors.player2 || "#f4d03f";
+
+      // Save color changes
+      player1ColorInput.addEventListener("change", () => {
+        const colors = JSON.parse(
+          localStorage.getItem("connect4Colors") || "{}",
+        );
+        colors.player1 = player1ColorInput.value;
+        localStorage.setItem("connect4Colors", JSON.stringify(colors));
+      });
+
+      player2ColorInput.addEventListener("change", () => {
+        const colors = JSON.parse(
+          localStorage.getItem("connect4Colors") || "{}",
+        );
+        colors.player2 = player2ColorInput.value;
+        localStorage.setItem("connect4Colors", JSON.stringify(colors));
+      });
+
+      // Reset colors to default
+      resetColorsButton.addEventListener("click", () => {
+        player1ColorInput.value = "#e94560";
+        player2ColorInput.value = "#f4d03f";
+        localStorage.setItem(
+          "connect4Colors",
+          JSON.stringify({
+            player1: "#e94560",
+            player2: "#f4d03f",
+          }),
+        );
+      });
+    </script>
+  </body>
+</html>

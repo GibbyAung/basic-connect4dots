@@ -1,0 +1,19 @@
+# Sound Files Test
+
+The following MP3 files should be placed in the sound-effects/ folder:
+
+## Essential Sounds:
+- drop.mp3 - Piece dropping sound
+- win.mp3 - Victory fanfare  
+- reset.mp3 - Game reset sound
+- draw.mp3 - Draw game sound
+
+## Optional Sounds:
+- hover.mp3 - Mouse hover sound
+- click.mp3 - Button click sound
+- error.mp3 - Invalid move sound
+- undo.mp3 - Undo move sound
+
+## Note:
+The game will work without these files, but sounds will be disabled.
+Missing files will not cause errors - they're handled gracefully.
